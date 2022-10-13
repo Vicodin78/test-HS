@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainTabBarViewController.swift
 //  TestHammerSystem
 //
 //  Created by Vicodin on 13.10.2022.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .purple
+        
     }
-
-
 }
-
