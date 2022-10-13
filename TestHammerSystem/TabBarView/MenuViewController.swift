@@ -11,6 +11,8 @@ class MenuViewController: UIViewController {
     
     private let arreyCity = ["Москва", "Калининград", "Санкт-Петербург", "Нижний Новгород", "Владимир"]
     
+    private let menuModel = MenuModel.makeMenuModel()
+    
     private lazy var citySwitch: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isUserInteractionEnabled = true
@@ -30,6 +32,11 @@ class MenuViewController: UIViewController {
     private lazy var cityPickerView: UIPickerView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isHidden = true
+//        $0.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.95)
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 10
+        $0.layer.borderWidth = 2
+        $0.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         $0.alpha = 0.0
         $0.dataSource = self
         $0.delegate = self
@@ -40,6 +47,7 @@ class MenuViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dataSource = self
         $0.delegate = self
+        $0.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         return $0
     }(UITableView())
     
@@ -67,22 +75,22 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
         layout()
         tapGesturesSwitch()
     }
     
     private func layout() {
         
-        [citySwitch, citySwitchImage, cityPickerView, tableView].forEach{view.addSubview($0)}
+        [citySwitch, citySwitchImage, tableView, cityPickerView].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
             citySwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             citySwitch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             
-            cityPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            cityPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            cityPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cityPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -6),
+            cityPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            cityPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             
             citySwitchImage.topAnchor.constraint(equalTo: citySwitch.topAnchor, constant: 3),
             citySwitchImage.leadingAnchor.constraint(equalTo: citySwitch.trailingAnchor, constant: 8),
@@ -131,16 +139,20 @@ extension MenuViewController: UIPickerViewDelegate {
 
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        menuModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as! MenuTableViewCell
+        cell.setupCell(menuModel[indexPath.row])
+        return cell
     }
 }
 
 //MARK: - UITableViewDelegate
 
 extension MenuViewController: UITableViewDelegate {
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//    }
 }
