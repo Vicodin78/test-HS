@@ -16,6 +16,8 @@
 		78E53BAD28F85E82007F69A7 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53BAC28F85E82007F69A7 /* ContactsViewController.swift */; };
 		78E53BAF28F85E9E007F69A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53BAE28F85E9E007F69A7 /* ProfileViewController.swift */; };
 		78E53BB128F85EBE007F69A7 /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53BB028F85EBE007F69A7 /* BasketViewController.swift */; };
+		78E53BB428F87E0F007F69A7 /* sf-ui-display-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78E53BB328F87E0F007F69A7 /* sf-ui-display-medium.otf */; };
+		78E53BB628F8924E007F69A7 /* CitySwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53BB528F8924E007F69A7 /* CitySwitcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		78E53BAC28F85E82007F69A7 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		78E53BAE28F85E9E007F69A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		78E53BB028F85EBE007F69A7 /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
+		78E53BB328F87E0F007F69A7 /* sf-ui-display-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-medium.otf"; sourceTree = "<group>"; };
+		78E53BB528F8924E007F69A7 /* CitySwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySwitcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +66,12 @@
 		78E53B9228F85560007F69A7 /* TestHammerSystem */ = {
 			isa = PBXGroup;
 			children = (
+				78E53BB228F87D60007F69A7 /* Fonts */,
 				78E53BA928F85E0F007F69A7 /* TabBarView */,
 				78E53B9328F85560007F69A7 /* AppDelegate.swift */,
 				78E53B9728F85560007F69A7 /* ViewController.swift */,
 				78E53BA728F85C4F007F69A7 /* MainTabBarViewController.swift */,
+				78E53BB528F8924E007F69A7 /* CitySwitcher.swift */,
 				78E53B9C28F85562007F69A7 /* Assets.xcassets */,
 				78E53B9E28F85562007F69A7 /* LaunchScreen.storyboard */,
 				78E53BA128F85562007F69A7 /* Info.plist */,
@@ -82,6 +88,14 @@
 				78E53BB028F85EBE007F69A7 /* BasketViewController.swift */,
 			);
 			path = TabBarView;
+			sourceTree = "<group>";
+		};
+		78E53BB228F87D60007F69A7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				78E53BB328F87E0F007F69A7 /* sf-ui-display-medium.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78E53BA028F85562007F69A7 /* LaunchScreen.storyboard in Resources */,
+				78E53BB428F87E0F007F69A7 /* sf-ui-display-medium.otf in Resources */,
 				78E53B9D28F85562007F69A7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +176,7 @@
 				78E53B9428F85560007F69A7 /* AppDelegate.swift in Sources */,
 				78E53BAB28F85E71007F69A7 /* MenuViewController.swift in Sources */,
 				78E53BAD28F85E82007F69A7 /* ContactsViewController.swift in Sources */,
+				78E53BB628F8924E007F69A7 /* CitySwitcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
