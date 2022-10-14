@@ -33,6 +33,10 @@ class MainTabBarViewController: UITabBarController {
         basketVC.tabBarItem.image = UIImage(named: "basket")
         
         viewControllers = [menuVC, contactsVC, profileVC, basketVC]
+        
+        tabBar.layer.backgroundColor = UIColor.white.cgColor
+        tabBar.tintColor = UIColor(named: "AccentColor")
+        tabBar.unselectedItemTintColor = UIColor(red: 0.765, green: 0.77, blue: 0.788, alpha: 1)
     }
 }
 

@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7892C4D128F8A7F700A6730F /* Model Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D028F8A7F700A6730F /* Model Menu.swift */; };
+		7892C4D128F8A7F700A6730F /* ModelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D028F8A7F700A6730F /* ModelMenu.swift */; };
 		7892C4D328F8B20600A6730F /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D228F8B20600A6730F /* MenuTableViewCell.swift */; };
 		7892C4D528F8B50200A6730F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D428F8B50200A6730F /* UIView+Extension.swift */; };
+		78CABA9828F9E2E600B8C6E3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CABA9728F9E2E600B8C6E3 /* CategoryCollectionViewCell.swift */; };
+		78CABA9A28F9F45E00B8C6E3 /* ModelCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CABA9928F9F45E00B8C6E3 /* ModelCategory.swift */; };
+		78CABAA328F9F81300B8C6E3 /* sf-ui-display-light-58646b33e0551.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABA9B28F9F81200B8C6E3 /* sf-ui-display-light-58646b33e0551.otf */; };
+		78CABAA428F9F81300B8C6E3 /* sf-ui-display-semibold-58646eddcae92.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABA9C28F9F81200B8C6E3 /* sf-ui-display-semibold-58646eddcae92.otf */; };
+		78CABAA528F9F81300B8C6E3 /* sf-ui-display-bold-58646a511e3d9.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABA9D28F9F81200B8C6E3 /* sf-ui-display-bold-58646a511e3d9.otf */; };
+		78CABAA628F9F81300B8C6E3 /* sf-ui-display-heavy-586470160b9e5.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABA9E28F9F81200B8C6E3 /* sf-ui-display-heavy-586470160b9e5.otf */; };
+		78CABAA728F9F81300B8C6E3 /* sf-ui-display-ultralight-58646b19bf205.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABA9F28F9F81300B8C6E3 /* sf-ui-display-ultralight-58646b19bf205.otf */; };
+		78CABAA828F9F81300B8C6E3 /* sf-ui-display-black-58646a6b80d5a.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABAA028F9F81300B8C6E3 /* sf-ui-display-black-58646a6b80d5a.otf */; };
+		78CABAA928F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABAA128F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf */; };
 		78E53B9428F85560007F69A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53B9328F85560007F69A7 /* AppDelegate.swift */; };
 		78E53B9828F85560007F69A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53B9728F85560007F69A7 /* ViewController.swift */; };
 		78E53B9D28F85562007F69A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78E53B9C28F85562007F69A7 /* Assets.xcassets */; };
@@ -23,9 +32,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7892C4D028F8A7F700A6730F /* Model Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model Menu.swift"; sourceTree = "<group>"; };
+		7892C4D028F8A7F700A6730F /* ModelMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMenu.swift; sourceTree = "<group>"; };
 		7892C4D228F8B20600A6730F /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		7892C4D428F8B50200A6730F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		78CABA9728F9E2E600B8C6E3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		78CABA9928F9F45E00B8C6E3 /* ModelCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCategory.swift; sourceTree = "<group>"; };
+		78CABA9B28F9F81200B8C6E3 /* sf-ui-display-light-58646b33e0551.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-light-58646b33e0551.otf"; sourceTree = "<group>"; };
+		78CABA9C28F9F81200B8C6E3 /* sf-ui-display-semibold-58646eddcae92.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-semibold-58646eddcae92.otf"; sourceTree = "<group>"; };
+		78CABA9D28F9F81200B8C6E3 /* sf-ui-display-bold-58646a511e3d9.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-bold-58646a511e3d9.otf"; sourceTree = "<group>"; };
+		78CABA9E28F9F81200B8C6E3 /* sf-ui-display-heavy-586470160b9e5.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-heavy-586470160b9e5.otf"; sourceTree = "<group>"; };
+		78CABA9F28F9F81300B8C6E3 /* sf-ui-display-ultralight-58646b19bf205.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-ultralight-58646b19bf205.otf"; sourceTree = "<group>"; };
+		78CABAA028F9F81300B8C6E3 /* sf-ui-display-black-58646a6b80d5a.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-black-58646a6b80d5a.otf"; sourceTree = "<group>"; };
+		78CABAA128F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-thin-58646e9b26e8b.otf"; sourceTree = "<group>"; };
 		78E53B9028F85560007F69A7 /* TestHammerSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHammerSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E53B9328F85560007F69A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78E53B9728F85560007F69A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,8 +93,10 @@
 				78E53B9328F85560007F69A7 /* AppDelegate.swift */,
 				78E53B9728F85560007F69A7 /* ViewController.swift */,
 				78E53BA728F85C4F007F69A7 /* MainTabBarViewController.swift */,
-				7892C4D028F8A7F700A6730F /* Model Menu.swift */,
+				7892C4D028F8A7F700A6730F /* ModelMenu.swift */,
+				78CABA9928F9F45E00B8C6E3 /* ModelCategory.swift */,
 				7892C4D228F8B20600A6730F /* MenuTableViewCell.swift */,
+				78CABA9728F9E2E600B8C6E3 /* CategoryCollectionViewCell.swift */,
 				7892C4D428F8B50200A6730F /* UIView+Extension.swift */,
 				78E53B9C28F85562007F69A7 /* Assets.xcassets */,
 				78E53B9E28F85562007F69A7 /* LaunchScreen.storyboard */,
@@ -99,6 +119,13 @@
 		78E53BB228F87D60007F69A7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				78CABAA028F9F81300B8C6E3 /* sf-ui-display-black-58646a6b80d5a.otf */,
+				78CABA9D28F9F81200B8C6E3 /* sf-ui-display-bold-58646a511e3d9.otf */,
+				78CABA9E28F9F81200B8C6E3 /* sf-ui-display-heavy-586470160b9e5.otf */,
+				78CABA9B28F9F81200B8C6E3 /* sf-ui-display-light-58646b33e0551.otf */,
+				78CABA9C28F9F81200B8C6E3 /* sf-ui-display-semibold-58646eddcae92.otf */,
+				78CABAA128F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf */,
+				78CABA9F28F9F81300B8C6E3 /* sf-ui-display-ultralight-58646b19bf205.otf */,
 				78E53BB328F87E0F007F69A7 /* sf-ui-display-medium.otf */,
 			);
 			path = Fonts;
@@ -163,8 +190,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				78E53BA028F85562007F69A7 /* LaunchScreen.storyboard in Resources */,
+				78CABAA928F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf in Resources */,
 				78E53BB428F87E0F007F69A7 /* sf-ui-display-medium.otf in Resources */,
+				78CABAA728F9F81300B8C6E3 /* sf-ui-display-ultralight-58646b19bf205.otf in Resources */,
+				78CABAA428F9F81300B8C6E3 /* sf-ui-display-semibold-58646eddcae92.otf in Resources */,
+				78CABAA328F9F81300B8C6E3 /* sf-ui-display-light-58646b33e0551.otf in Resources */,
 				78E53B9D28F85562007F69A7 /* Assets.xcassets in Resources */,
+				78CABAA828F9F81300B8C6E3 /* sf-ui-display-black-58646a6b80d5a.otf in Resources */,
+				78CABAA528F9F81300B8C6E3 /* sf-ui-display-bold-58646a511e3d9.otf in Resources */,
+				78CABAA628F9F81300B8C6E3 /* sf-ui-display-heavy-586470160b9e5.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,9 +213,11 @@
 				78E53BAF28F85E9E007F69A7 /* ProfileViewController.swift in Sources */,
 				78E53BA828F85C4F007F69A7 /* MainTabBarViewController.swift in Sources */,
 				78E53BB128F85EBE007F69A7 /* BasketViewController.swift in Sources */,
-				7892C4D128F8A7F700A6730F /* Model Menu.swift in Sources */,
+				7892C4D128F8A7F700A6730F /* ModelMenu.swift in Sources */,
+				78CABA9A28F9F45E00B8C6E3 /* ModelCategory.swift in Sources */,
 				7892C4D328F8B20600A6730F /* MenuTableViewCell.swift in Sources */,
 				78E53B9828F85560007F69A7 /* ViewController.swift in Sources */,
+				78CABA9828F9E2E600B8C6E3 /* CategoryCollectionViewCell.swift in Sources */,
 				78E53B9428F85560007F69A7 /* AppDelegate.swift in Sources */,
 				78E53BAB28F85E71007F69A7 /* MenuViewController.swift in Sources */,
 				78E53BAD28F85E82007F69A7 /* ContactsViewController.swift in Sources */,
