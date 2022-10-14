@@ -17,6 +17,9 @@ struct CategoryModel {
         model.append(CategoryModel(name: "Десерты"))
         model.append(CategoryModel(name: "Напитки"))
         model.append(CategoryModel(name: "Снеки"))
+        model.append(CategoryModel(name: "Соки"))
+        model.append(CategoryModel(name: "Фреши"))
+        model.append(CategoryModel(name: "Кофе"))
         return model
     }
 }

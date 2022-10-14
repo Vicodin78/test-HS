@@ -53,9 +53,10 @@ class MenuViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 300, height: 112)
+        layout.minimumLineSpacing = 16
 
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        collection.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.showsHorizontalScrollIndicator = false
         collection.dataSource = self
@@ -69,11 +70,11 @@ class MenuViewController: UIViewController {
         layout.itemSize = CGSize(width: 88, height: 32)
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 24
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+        layout.minimumLineSpacing = 8
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        collection.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
         collection.showsHorizontalScrollIndicator = false
         collection.dataSource = self
         collection.delegate = self
@@ -86,6 +87,7 @@ class MenuViewController: UIViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
+        $0.separatorInset = .zero
         return $0
     }(UITableView())
     
@@ -113,7 +115,7 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        view.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
         layout()
         tapGesturesSwitch()
     }
@@ -125,8 +127,7 @@ class MenuViewController: UIViewController {
         NSLayoutConstraint.activate([
             citySwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             citySwitch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            citySwitch.bottomAnchor.constraint(equalTo: collectionViewBanners.topAnchor),
-            
+
             cityPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -6),
             cityPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             cityPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
@@ -135,15 +136,15 @@ class MenuViewController: UIViewController {
             citySwitchImage.leadingAnchor.constraint(equalTo: citySwitch.trailingAnchor, constant: 8),
             citySwitchImage.bottomAnchor.constraint(equalTo: citySwitch.bottomAnchor),
             
-            collectionViewBanners.topAnchor.constraint(equalTo: citySwitch.bottomAnchor),
+            collectionViewBanners.topAnchor.constraint(equalTo: citySwitch.bottomAnchor, constant: 24),
             collectionViewBanners.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             collectionViewBanners.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionViewBanners.bottomAnchor.constraint(equalTo: collectionViewCategory.topAnchor),
             collectionViewBanners.heightAnchor.constraint(equalToConstant: 112),
             
             collectionViewCategory.topAnchor.constraint(equalTo: collectionViewBanners.bottomAnchor),
-            collectionViewCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            collectionViewCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            collectionViewCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            collectionViewCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionViewCategory.bottomAnchor.constraint(equalTo: tableView.topAnchor),
             collectionViewCategory.heightAnchor.constraint(equalToConstant: 80),
             
@@ -222,7 +223,7 @@ extension MenuViewController: UICollectionViewDataSource {
                 cell.contentView.layer.borderWidth = 0
                 cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
             } else {
-                cell.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+                cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
             }
             return cell
         } else {
@@ -235,35 +236,17 @@ extension MenuViewController: UICollectionViewDataSource {
 
 //MARK: - UICollectionViewDelegateFlowLayout
 extension MenuViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let size = CGSize(width: 88, height: 32)
-//
-//        if collectionView == collectionViewCategory {
-//            return size
-//        }
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        1
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        UIEdgeInsets(top: 24, left: 0, bottom: 50, right: 0)
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        1
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if previousSelected != nil {
-            if let cell = collectionView.cellForItem(at: previousSelected!) {
-                cell.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
-                cell.contentView.layer.borderWidth = 1
+        if collectionView == collectionViewCategory {
+            if previousSelected != nil {
+                if let cell = collectionView.cellForItem(at: previousSelected!) {
+                    cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
+                    cell.contentView.layer.borderWidth = 1
+                }
             }
+            currentSelected = indexPath.row
+            previousSelected = indexPath
+            collectionView.reloadItems(at: [indexPath])
         }
-        currentSelected = indexPath.row
-        previousSelected = indexPath
-        collectionView.reloadItems(at: [indexPath])
     }
 }

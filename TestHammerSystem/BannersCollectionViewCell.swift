@@ -11,7 +11,9 @@ class BannersCollectionViewCell: UICollectionViewCell {
     
     private let image: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleToFill
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
         return $0
     }(UIImageView())
     
