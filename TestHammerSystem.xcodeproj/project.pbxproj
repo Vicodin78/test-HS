@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7868CCDB28FA0D1B0063EBCE /* ModelBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7868CCDA28FA0D1B0063EBCE /* ModelBanner.swift */; };
+		7868CCDD28FA10780063EBCE /* BannersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7868CCDC28FA10780063EBCE /* BannersCollectionViewCell.swift */; };
 		7892C4D128F8A7F700A6730F /* ModelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D028F8A7F700A6730F /* ModelMenu.swift */; };
 		7892C4D328F8B20600A6730F /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D228F8B20600A6730F /* MenuTableViewCell.swift */; };
 		7892C4D528F8B50200A6730F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7892C4D428F8B50200A6730F /* UIView+Extension.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7868CCDA28FA0D1B0063EBCE /* ModelBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBanner.swift; sourceTree = "<group>"; };
+		7868CCDC28FA10780063EBCE /* BannersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersCollectionViewCell.swift; sourceTree = "<group>"; };
 		7892C4D028F8A7F700A6730F /* ModelMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMenu.swift; sourceTree = "<group>"; };
 		7892C4D228F8B20600A6730F /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		7892C4D428F8B50200A6730F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -95,7 +99,9 @@
 				78E53BA728F85C4F007F69A7 /* MainTabBarViewController.swift */,
 				7892C4D028F8A7F700A6730F /* ModelMenu.swift */,
 				78CABA9928F9F45E00B8C6E3 /* ModelCategory.swift */,
+				7868CCDA28FA0D1B0063EBCE /* ModelBanner.swift */,
 				7892C4D228F8B20600A6730F /* MenuTableViewCell.swift */,
+				7868CCDC28FA10780063EBCE /* BannersCollectionViewCell.swift */,
 				78CABA9728F9E2E600B8C6E3 /* CategoryCollectionViewCell.swift */,
 				7892C4D428F8B50200A6730F /* UIView+Extension.swift */,
 				78E53B9C28F85562007F69A7 /* Assets.xcassets */,
@@ -209,11 +215,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7868CCDB28FA0D1B0063EBCE /* ModelBanner.swift in Sources */,
 				7892C4D528F8B50200A6730F /* UIView+Extension.swift in Sources */,
 				78E53BAF28F85E9E007F69A7 /* ProfileViewController.swift in Sources */,
 				78E53BA828F85C4F007F69A7 /* MainTabBarViewController.swift in Sources */,
 				78E53BB128F85EBE007F69A7 /* BasketViewController.swift in Sources */,
 				7892C4D128F8A7F700A6730F /* ModelMenu.swift in Sources */,
+				7868CCDD28FA10780063EBCE /* BannersCollectionViewCell.swift in Sources */,
 				78CABA9A28F9F45E00B8C6E3 /* ModelCategory.swift in Sources */,
 				7892C4D328F8B20600A6730F /* MenuTableViewCell.swift in Sources */,
 				78E53B9828F85560007F69A7 /* ViewController.swift in Sources */,

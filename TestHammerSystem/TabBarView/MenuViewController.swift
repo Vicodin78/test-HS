@@ -14,6 +14,8 @@ class MenuViewController: UIViewController {
     
     private let arreyCity = ["Москва", "Калининград", "Санкт-Петербург", "Нижний Новгород", "Владимир"]
     
+    private let bannersModel = BannerModel.makeCategoryModel()
+    
     private let categoryModel = CategoryModel.makeCategoryModel()
     
     private let menuModel = MenuModel.makeMenuModel()
@@ -47,8 +49,24 @@ class MenuViewController: UIViewController {
         return $0
     }(UIPickerView())
     
+    private lazy var collectionViewBanners: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 300, height: 112)
+
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.showsHorizontalScrollIndicator = false
+        collection.dataSource = self
+        collection.delegate = self
+        collection.register(BannersCollectionViewCell.self, forCellWithReuseIdentifier: BannersCollectionViewCell.identifier)
+        return collection
+    }()
+    
     private lazy var collectionViewCategory: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 88, height: 32)
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 24
         layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
@@ -102,12 +120,12 @@ class MenuViewController: UIViewController {
     
     private func layout() {
         
-        [citySwitch, citySwitchImage, collectionViewCategory, tableView, cityPickerView].forEach{view.addSubview($0)}
+        [citySwitch, citySwitchImage, collectionViewBanners, collectionViewCategory, tableView, cityPickerView].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
             citySwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             citySwitch.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            citySwitch.bottomAnchor.constraint(equalTo: collectionViewCategory.topAnchor),
+            citySwitch.bottomAnchor.constraint(equalTo: collectionViewBanners.topAnchor),
             
             cityPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -6),
             cityPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
@@ -117,7 +135,13 @@ class MenuViewController: UIViewController {
             citySwitchImage.leadingAnchor.constraint(equalTo: citySwitch.trailingAnchor, constant: 8),
             citySwitchImage.bottomAnchor.constraint(equalTo: citySwitch.bottomAnchor),
             
-            collectionViewCategory.topAnchor.constraint(equalTo: citySwitch.bottomAnchor),
+            collectionViewBanners.topAnchor.constraint(equalTo: citySwitch.bottomAnchor),
+            collectionViewBanners.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            collectionViewBanners.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            collectionViewBanners.bottomAnchor.constraint(equalTo: collectionViewCategory.topAnchor),
+            collectionViewBanners.heightAnchor.constraint(equalToConstant: 112),
+            
+            collectionViewCategory.topAnchor.constraint(equalTo: collectionViewBanners.bottomAnchor),
             collectionViewCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             collectionViewCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             collectionViewCategory.bottomAnchor.constraint(equalTo: tableView.topAnchor),
@@ -132,7 +156,6 @@ class MenuViewController: UIViewController {
 }
 
 //MARK: - UIPickerViewDataSource
-
 extension MenuViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
@@ -144,7 +167,6 @@ extension MenuViewController: UIPickerViewDataSource {
 }
 
 //MARK: - UIPickerViewDelegate
-
 extension MenuViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         arreyCity[row]
@@ -162,7 +184,6 @@ extension MenuViewController: UIPickerViewDelegate {
 }
 
 //MARK: - UITableViewDataSource
-
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         menuModel.count
@@ -176,40 +197,51 @@ extension MenuViewController: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
-
 extension MenuViewController: UITableViewDelegate {
 
 }
 
-//MARK: - UITableViewDelegate
-
+//MARK: - UICollectionViewDataSource
 extension MenuViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categoryModel.count
+        if collectionView == collectionViewCategory {
+            return categoryModel.count
+        } else {
+            return bannersModel.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellCategory.identifier, for: indexPath) as! CollectionViewCellCategory
-        cell.setupCell(categoryModel[indexPath.item])
-        
-        if currentSelected != nil && currentSelected == indexPath.row {
-            cell.layer.cornerRadius = 16
-            cell.contentView.layer.borderWidth = 0
-            cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
+        if collectionView == collectionViewCategory {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellCategory.identifier, for: indexPath) as! CollectionViewCellCategory
+            cell.setupCell(categoryModel[indexPath.item])
+            
+            if currentSelected != nil && currentSelected == indexPath.row {
+                cell.layer.cornerRadius = 16
+                cell.contentView.layer.borderWidth = 0
+                cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
+            } else {
+                cell.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+            }
+            return cell
         } else {
-            cell.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannersCollectionViewCell.identifier, for: indexPath) as! BannersCollectionViewCell
+            cell.setupCell(bannersModel[indexPath.item])
+            return cell
         }
-        return cell
     }
 }
 
-//MARK: - UITableViewDelegate
-
+//MARK: - UICollectionViewDelegateFlowLayout
 extension MenuViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 88, height: 32)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let size = CGSize(width: 88, height: 32)
+//
+//        if collectionView == collectionViewCategory {
+//            return size
+//        }
+//    }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 //        1
