@@ -14,8 +14,6 @@ class MenuViewController: UIViewController {
     
     private let arreyCity = ["Москва", "Калининград", "Санкт-Петербург", "Нижний Новгород", "Владимир"]
     
-    private let bannersModel = BannerModel.makeCategoryModel()
-    
     private let categoryModel = CategoryModel.makeCategoryModel()
     
     private let menuModel = MenuModel.makeMenuModel()
@@ -49,22 +47,6 @@ class MenuViewController: UIViewController {
         return $0
     }(UIPickerView())
     
-    private lazy var collectionViewBanners: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 300, height: 112)
-        layout.minimumLineSpacing = 16
-
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.showsHorizontalScrollIndicator = false
-        collection.dataSource = self
-        collection.delegate = self
-        collection.register(BannersCollectionViewCell.self, forCellWithReuseIdentifier: BannersCollectionViewCell.identifier)
-        return collection
-    }()
-    
     private lazy var collectionViewCategory: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 88, height: 32)
@@ -87,6 +69,7 @@ class MenuViewController: UIViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
+        $0.register(BannersTableViewCell.self, forCellReuseIdentifier: BannersTableViewCell.identifier)
         $0.separatorInset = .zero
         return $0
     }(UITableView())
@@ -122,7 +105,7 @@ class MenuViewController: UIViewController {
     
     private func layout() {
         
-        [citySwitch, citySwitchImage, collectionViewBanners, collectionViewCategory, tableView, cityPickerView].forEach{view.addSubview($0)}
+        [citySwitch, citySwitchImage, collectionViewCategory, tableView, cityPickerView].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
             citySwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
@@ -136,13 +119,7 @@ class MenuViewController: UIViewController {
             citySwitchImage.leadingAnchor.constraint(equalTo: citySwitch.trailingAnchor, constant: 8),
             citySwitchImage.bottomAnchor.constraint(equalTo: citySwitch.bottomAnchor),
             
-            collectionViewBanners.topAnchor.constraint(equalTo: citySwitch.bottomAnchor, constant: 24),
-            collectionViewBanners.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            collectionViewBanners.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            collectionViewBanners.bottomAnchor.constraint(equalTo: collectionViewCategory.topAnchor),
-            collectionViewBanners.heightAnchor.constraint(equalToConstant: 112),
-            
-            collectionViewCategory.topAnchor.constraint(equalTo: collectionViewBanners.bottomAnchor),
+            collectionViewCategory.topAnchor.constraint(equalTo: citySwitch.bottomAnchor),
             collectionViewCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             collectionViewCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionViewCategory.bottomAnchor.constraint(equalTo: tableView.topAnchor),
@@ -186,14 +163,20 @@ extension MenuViewController: UIPickerViewDelegate {
 
 //MARK: - UITableViewDataSource
 extension MenuViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        menuModel.count
+        section == 0 ? 1 : menuModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let firstCell = tableView.dequeueReusableCell(withIdentifier: BannersTableViewCell.identifier, for: indexPath) as! BannersTableViewCell
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as! MenuTableViewCell
         cell.setupCell(menuModel[indexPath.row])
-        return cell
+        return indexPath.section == 0 ? firstCell : cell
     }
 }
 
@@ -207,9 +190,9 @@ extension MenuViewController: UITableViewDelegate {
 //            ])
 //        }
 //    }
-//    
+//
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
+//
 //    }
 }
 
@@ -217,31 +200,24 @@ extension MenuViewController: UITableViewDelegate {
 extension MenuViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == collectionViewCategory {
-            return categoryModel.count
-        } else {
-            return bannersModel.count
-        }
+        return categoryModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == collectionViewCategory {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellCategory.identifier, for: indexPath) as! CollectionViewCellCategory
-            cell.setupCell(categoryModel[indexPath.item])
-            
-            if currentSelected != nil && currentSelected == indexPath.row {
-                cell.layer.cornerRadius = 16
-                cell.contentView.layer.borderWidth = 0
-                cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
-            } else {
-                cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
-            }
-            return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellCategory.identifier, for: indexPath) as! CollectionViewCellCategory
+        cell.setupCell(categoryModel[indexPath.item])
+        
+        if currentSelected != nil && currentSelected == indexPath.row {
+            cell.layer.cornerRadius = 16
+            cell.contentView.layer.borderWidth = 0
+            cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannersCollectionViewCell.identifier, for: indexPath) as! BannersCollectionViewCell
-            cell.setupCell(bannersModel[indexPath.item])
-            return cell
+            cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
         }
+        return cell
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannersCollectionViewCell.identifier, for: indexPath) as! BannersCollectionViewCell
+//            cell.setupCell(bannersModel[indexPath.item])
+//            return cell
     }
 }
 
