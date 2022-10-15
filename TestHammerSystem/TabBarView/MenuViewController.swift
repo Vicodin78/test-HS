@@ -199,7 +199,18 @@ extension MenuViewController: UITableViewDataSource {
 
 //MARK: - UITableViewDelegate
 extension MenuViewController: UITableViewDelegate {
-
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        UIView.animate(withDuration: 0.4) {
+//            NSLayoutConstraint.activate([
+//                self.collectionViewBanners.topAnchor.constraint(equalTo: self.citySwitch.bottomAnchor, constant: 0),
+//                self.collectionViewBanners.heightAnchor.constraint(equalToConstant: 0)
+//            ])
+//        }
+//    }
+//    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//    }
 }
 
 //MARK: - UICollectionViewDataSource
