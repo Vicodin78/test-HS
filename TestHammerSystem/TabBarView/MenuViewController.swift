@@ -9,12 +9,9 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    var previousSelected : IndexPath?
-    var currentSelected : Int?
-    
     private let arreyCity = ["Москва", "Калининград", "Санкт-Петербург", "Нижний Новгород", "Владимир"]
     
-    private let categoryModel = CategoryModel.makeCategoryModel()
+    private let headerCategory = CategoryHeaderView()
     
     private let menuModel = MenuModel.makeMenuModel()
     
@@ -47,25 +44,12 @@ class MenuViewController: UIViewController {
         return $0
     }(UIPickerView())
     
-    private lazy var collectionViewCategory: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 88, height: 32)
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 24
-        layout.minimumLineSpacing = 8
-        
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
-        collection.showsHorizontalScrollIndicator = false
-        collection.dataSource = self
-        collection.delegate = self
-        collection.register(CollectionViewCellCategory.self, forCellWithReuseIdentifier: CollectionViewCellCategory.identifier)
-        return collection
-    }()
-    
     private lazy var tableView: UITableView = {
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
+        
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundView = bgColorView
         $0.dataSource = self
         $0.delegate = self
         $0.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
@@ -105,7 +89,7 @@ class MenuViewController: UIViewController {
     
     private func layout() {
         
-        [citySwitch, citySwitchImage, collectionViewCategory, tableView, cityPickerView].forEach{view.addSubview($0)}
+        [citySwitch, citySwitchImage, tableView, cityPickerView].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
             citySwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
@@ -119,13 +103,7 @@ class MenuViewController: UIViewController {
             citySwitchImage.leadingAnchor.constraint(equalTo: citySwitch.trailingAnchor, constant: 8),
             citySwitchImage.bottomAnchor.constraint(equalTo: citySwitch.bottomAnchor),
             
-            collectionViewCategory.topAnchor.constraint(equalTo: citySwitch.bottomAnchor),
-            collectionViewCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            collectionViewCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            collectionViewCategory.bottomAnchor.constraint(equalTo: tableView.topAnchor),
-            collectionViewCategory.heightAnchor.constraint(equalToConstant: 80),
-            
-            tableView.topAnchor.constraint(equalTo: collectionViewCategory.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: citySwitch.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -178,62 +156,15 @@ extension MenuViewController: UITableViewDataSource {
         cell.setupCell(menuModel[indexPath.row])
         return indexPath.section == 0 ? firstCell : cell
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        section == 1 ? headerCategory : UIView()
+    }
 }
 
 //MARK: - UITableViewDelegate
 extension MenuViewController: UITableViewDelegate {
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        UIView.animate(withDuration: 0.4) {
-//            NSLayoutConstraint.activate([
-//                self.collectionViewBanners.topAnchor.constraint(equalTo: self.citySwitch.bottomAnchor, constant: 0),
-//                self.collectionViewBanners.heightAnchor.constraint(equalToConstant: 0)
-//            ])
-//        }
-//    }
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//    }
-}
-
-//MARK: - UICollectionViewDataSource
-extension MenuViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryModel.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellCategory.identifier, for: indexPath) as! CollectionViewCellCategory
-        cell.setupCell(categoryModel[indexPath.item])
-        
-        if currentSelected != nil && currentSelected == indexPath.row {
-            cell.layer.cornerRadius = 16
-            cell.contentView.layer.borderWidth = 0
-            cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
-        } else {
-            cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
-        }
-        return cell
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannersCollectionViewCell.identifier, for: indexPath) as! BannersCollectionViewCell
-//            cell.setupCell(bannersModel[indexPath.item])
-//            return cell
-    }
-}
-
-//MARK: - UICollectionViewDelegateFlowLayout
-extension MenuViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == collectionViewCategory {
-            if previousSelected != nil {
-                if let cell = collectionView.cellForItem(at: previousSelected!) {
-                    cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
-                    cell.contentView.layer.borderWidth = 1
-                }
-            }
-            currentSelected = indexPath.row
-            previousSelected = indexPath
-            collectionView.reloadItems(at: [indexPath])
-        }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        section == 1 ? 80 : 0
     }
 }

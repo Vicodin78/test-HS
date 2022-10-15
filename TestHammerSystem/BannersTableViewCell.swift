@@ -30,19 +30,20 @@ class BannersTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        contentView.layer.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1).cgColor
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
         
-    func layout() {
+    private func layout() {
         contentView.addSubview(collectionViewBanners)
         
         NSLayoutConstraint.activate([
             collectionViewBanners.topAnchor.constraint(equalTo: contentView.topAnchor),
             collectionViewBanners.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            collectionViewBanners.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionViewBanners.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 24),
             collectionViewBanners.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             collectionViewBanners.heightAnchor.constraint(equalToConstant: 112)
         ])
@@ -53,7 +54,7 @@ class BannersTableViewCell: UITableViewCell {
 extension BannersTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return bannersModel.count
+        return bannersModel.count
         
     }
     
