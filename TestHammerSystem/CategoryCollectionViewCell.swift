@@ -31,6 +31,14 @@ class CollectionViewCellCategory: UICollectionViewCell {
         titleCell.text = model.name
     }
     
+    func fontBold() {
+        titleCell.font = UIFont(name: "SFUIDisplay-Bold", size: 13)
+    }
+    
+    func fontLight() {
+        titleCell.font = UIFont(name: "SFUIDisplay-Light", size: 13)
+    }
+    
     private func customizeCell() {
         contentView.layer.cornerRadius = 16
         contentView.layer.borderWidth = 1

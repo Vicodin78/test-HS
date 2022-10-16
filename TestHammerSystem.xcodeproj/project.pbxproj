@@ -23,6 +23,7 @@
 		78CABAA928F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CABAA128F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf */; };
 		78D48A4E28FACEF200E81C7C /* BannersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D48A4D28FACEF100E81C7C /* BannersTableViewCell.swift */; };
 		78D48A5028FAD52500E81C7C /* CategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D48A4F28FAD52500E81C7C /* CategoryHeaderView.swift */; };
+		78D48A7428FB93C500E81C7C /* ModelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D48A7328FB93C500E81C7C /* ModelJSON.swift */; };
 		78E53B9428F85560007F69A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E53B9328F85560007F69A7 /* AppDelegate.swift */; };
 		78E53B9D28F85562007F69A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78E53B9C28F85562007F69A7 /* Assets.xcassets */; };
 		78E53BA028F85562007F69A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78E53B9E28F85562007F69A7 /* LaunchScreen.storyboard */; };
@@ -51,6 +52,7 @@
 		78CABAA128F9F81300B8C6E3 /* sf-ui-display-thin-58646e9b26e8b.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-thin-58646e9b26e8b.otf"; sourceTree = "<group>"; };
 		78D48A4D28FACEF100E81C7C /* BannersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersTableViewCell.swift; sourceTree = "<group>"; };
 		78D48A4F28FAD52500E81C7C /* CategoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeaderView.swift; sourceTree = "<group>"; };
+		78D48A7328FB93C500E81C7C /* ModelJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJSON.swift; sourceTree = "<group>"; };
 		78E53B9028F85560007F69A7 /* TestHammerSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHammerSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78E53B9328F85560007F69A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78E53B9C28F85562007F69A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				78E53B9C28F85562007F69A7 /* Assets.xcassets */,
 				78E53B9E28F85562007F69A7 /* LaunchScreen.storyboard */,
 				78E53BA128F85562007F69A7 /* Info.plist */,
+				78D48A7328FB93C500E81C7C /* ModelJSON.swift */,
 			);
 			path = TestHammerSystem;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				78E53BAF28F85E9E007F69A7 /* ProfileViewController.swift in Sources */,
 				78E53BA828F85C4F007F69A7 /* MainTabBarViewController.swift in Sources */,
 				78E53BB128F85EBE007F69A7 /* BasketViewController.swift in Sources */,
+				78D48A7428FB93C500E81C7C /* ModelJSON.swift in Sources */,
 				78D48A5028FAD52500E81C7C /* CategoryHeaderView.swift in Sources */,
 				7892C4D128F8A7F700A6730F /* ModelMenu.swift in Sources */,
 				7868CCDD28FA10780063EBCE /* BannersCollectionViewCell.swift in Sources */,

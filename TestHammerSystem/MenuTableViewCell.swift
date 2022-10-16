@@ -8,6 +8,8 @@
 import UIKit
 
 class MenuTableViewCell: UITableViewCell {
+    
+    private var menuArrey: [Menu]?
 
     private let whiteView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +55,27 @@ class MenuTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func parsJson() {
+        let urlString = "https://api.punkapi.com/v2/beers"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                self.menuArrey = try JSONDecoder().decode([Menu].self, from: data)
+            }catch{
+                print(error)
+            }
+        }.resume()
     }
     
     func setupCell(_ model: MenuModel) {

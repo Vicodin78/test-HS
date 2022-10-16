@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol CategoryCellDelegate: AnyObject {
+    func scrollCategory(index: IndexPath)
+}
+
 class CategoryHeaderView: UIView {
+    
+    weak var delegate: CategoryCellDelegate?
 
     private var previousSelected : IndexPath?
     private var currentSelected : Int?
@@ -54,8 +60,6 @@ class CategoryHeaderView: UIView {
 
         ])
     }
-    
-    
 }
 
 //MARK: - UICollectionViewDataSource
@@ -73,30 +77,29 @@ extension CategoryHeaderView: UICollectionViewDataSource {
             cell.layer.cornerRadius = 16
             cell.contentView.layer.borderWidth = 0
             cell.backgroundColor = UIColor(red: 0.992, green: 0.227, blue: 0.412, alpha: 0.2)
+//            cell.fontBold()
         } else {
             cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
         }
         return cell
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannersCollectionViewCell.identifier, for: indexPath) as! BannersCollectionViewCell
-//            cell.setupCell(bannersModel[indexPath.item])
-//            return cell
     }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
 extension CategoryHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == collectionViewCategory {
-            if previousSelected != nil {
-                if let cell = collectionView.cellForItem(at: previousSelected!) {
-                    cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
-                    cell.contentView.layer.borderWidth = 1
-                }
+        if previousSelected != nil {
+            if let cell = collectionView.cellForItem(at: previousSelected!) {
+                cell.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
+                cell.contentView.layer.borderWidth = 1
+                
             }
-            currentSelected = indexPath.row
-            previousSelected = indexPath
-            collectionView.reloadItems(at: [indexPath])
         }
+        currentSelected = indexPath.row
+        previousSelected = indexPath
+        collectionView.reloadItems(at: [indexPath])
+        
+        delegate?.scrollCategory(index: indexPath)
     }
 }
 

@@ -85,6 +85,7 @@ class MenuViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
         layout()
         tapGesturesSwitch()
+        headerCategory.delegate = self
     }
     
     private func layout() {
@@ -167,4 +168,36 @@ extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         section == 1 ? 80 : 0
     }
+}
+
+//MARK: - CategoryCellDelegate
+extension MenuViewController: CategoryCellDelegate {
+    func scrollCategory(index: IndexPath) {
+        var value: Int = 0
+        switch index.item {
+        case 0:
+            value = 0
+        case 1:
+            value = 3
+        case 2:
+            value = 5
+        case 3:
+            value = 6
+        case 4:
+            value = 9
+        case 5:
+            value = 12
+        case 6:
+            value = 15
+        case 7:
+            value = 18
+        case 8:
+            value = 22
+        default:
+            break
+        }
+        tableView.scrollToRow(at: IndexPath(item: value, section: 1), at: .top, animated: true)
+    }
+    
+    
 }
