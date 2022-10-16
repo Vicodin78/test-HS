@@ -100,6 +100,7 @@
 				78E53BA928F85E0F007F69A7 /* TabBarView */,
 				78E53B9328F85560007F69A7 /* AppDelegate.swift */,
 				78E53BA728F85C4F007F69A7 /* MainTabBarViewController.swift */,
+				78D48A7328FB93C500E81C7C /* ModelJSON.swift */,
 				7892C4D028F8A7F700A6730F /* ModelMenu.swift */,
 				78CABA9928F9F45E00B8C6E3 /* ModelCategory.swift */,
 				7868CCDA28FA0D1B0063EBCE /* ModelBanner.swift */,
@@ -112,7 +113,6 @@
 				78E53B9C28F85562007F69A7 /* Assets.xcassets */,
 				78E53B9E28F85562007F69A7 /* LaunchScreen.storyboard */,
 				78E53BA128F85562007F69A7 /* Info.plist */,
-				78D48A7328FB93C500E81C7C /* ModelJSON.swift */,
 			);
 			path = TestHammerSystem;
 			sourceTree = "<group>";

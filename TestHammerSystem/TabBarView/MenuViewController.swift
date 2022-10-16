@@ -13,13 +13,14 @@ class MenuViewController: UIViewController {
     
     private let headerCategory = CategoryHeaderView()
     
-    private let menuModel = MenuModel.makeMenuModel()
+    private var menuArrey = [Menu]()
     
     private lazy var citySwitch: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isUserInteractionEnabled = true
         $0.text = arreyCity[0]
         $0.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        $0.textColor = UIColor(red: 0.133, green: 0.157, blue: 0.192, alpha: 1)
         return $0
     }(UILabel())
     
@@ -83,9 +84,46 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.953, green: 0.961, blue: 0.976, alpha: 1)
+        parsJson()
         layout()
         tapGesturesSwitch()
         headerCategory.delegate = self
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func parsJson() {
+        let urlString = "https://api.punkapi.com/v2/beers"
+
+        guard let url = URL(string: urlString) else { return }
+
+        URLSession.shared.dataTask(with: url) { [self] data, response, error in
+            if let error = error {
+                print(error)
+                return
+            }
+
+            guard let data = data else { return }
+
+            do {
+                let arrey = try JSONDecoder().decode([Menu].self, from: data)
+                DispatchQueue.main.async {
+                    self.menuArrey = arrey
+                    self.tableView.reloadData()
+                }
+            }catch{
+                print(error)
+            }
+        }.resume()
     }
     
     private func layout() {
@@ -147,14 +185,18 @@ extension MenuViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : menuModel.count
+        section == 0 ? 1 : menuArrey.count
+//        section == 0 ? 1 : 25
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let firstCell = tableView.dequeueReusableCell(withIdentifier: BannersTableViewCell.identifier, for: indexPath) as! BannersTableViewCell
         
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as! MenuTableViewCell
-        cell.setupCell(menuModel[indexPath.row])
+        if self.menuArrey.count > 0 {
+            cell.setupCell(self.menuArrey[indexPath.row])
+        }
+        
         return indexPath.section == 0 ? firstCell : cell
     }
     

@@ -9,10 +9,10 @@ import UIKit
 
 class MainTabBarViewController: UITabBarController {
     
-    let menuVC = MenuViewController()
-    let contactsVC = ContactsViewController()
-    let profileVC = ProfileViewController()
-    let basketVC = BasketViewController()
+    private let menuVC = MenuViewController()
+    private let contactsVC = ContactsViewController()
+    private let profileVC = ProfileViewController()
+    private let basketVC = BasketViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()

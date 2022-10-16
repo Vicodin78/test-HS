@@ -8,8 +8,6 @@
 import UIKit
 
 class MenuTableViewCell: UITableViewCell {
-    
-    private var menuArrey: [Menu]?
 
     private let whiteView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +24,7 @@ class MenuTableViewCell: UITableViewCell {
     private let namePizza: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        $0.textColor = UIColor(red: 0.133, green: 0.157, blue: 0.192, alpha: 1)
         return $0
     }(UILabel())
     
@@ -33,7 +32,7 @@ class MenuTableViewCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.numberOfLines = 0
         $0.font = UIFont(name: "SFUIDisplay-Medium", size: 13)
-        $0.textColor = .systemGray4
+        $0.textColor = UIColor(red: 0.665, green: 0.668, blue: 0.679, alpha: 1)
         return $0
     }(UILabel())
     
@@ -57,32 +56,29 @@ class MenuTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func parsJson() {
-        let urlString = "https://api.punkapi.com/v2/beers"
+    func setupCell(_ model: Menu) {
         
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            guard let data = data else { return }
-            
-            do {
-                self.menuArrey = try JSONDecoder().decode([Menu].self, from: data)
-            }catch{
-                print(error)
-            }
-        }.resume()
-    }
+//        if let url = URL(string: model.image_url) {
+//            if let data = try? Data(contentsOf: url) {
+//                self.pizzaImage.image = UIImage(data: data)
+//            }
+//        }
     
-    func setupCell(_ model: MenuModel) {
-        pizzaImage.image = model.image
-        namePizza.text = model.name
-        descriptionPizza.text = model.description
-        pricePizza.text = model.price
+    let url = URL(string: model.image_url)
+        do {
+            if let url = url {
+                Task{@MainActor in
+                    let (data, _) = try await URLSession.shared.data(from: url)
+                    
+                    self.pizzaImage.image = UIImage(data: data)
+                    self.namePizza.text = model.name
+                    self.descriptionPizza.text = model.description
+                    self.pricePizza.text = "от 345 р"
+                }
+            }
+        } catch let error {
+            print(error)
+        }
     }
     
     private func layout() {
@@ -105,6 +101,7 @@ class MenuTableViewCell: UITableViewCell {
             
             namePizza.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: pizzaInsert),
             namePizza.leadingAnchor.constraint(equalTo: pizzaImage.trailingAnchor, constant: 32),
+            namePizza.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             descriptionPizza.topAnchor.constraint(equalTo: namePizza.bottomAnchor, constant: 8),
             descriptionPizza.leadingAnchor.constraint(equalTo: namePizza.leadingAnchor),
